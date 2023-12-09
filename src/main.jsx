@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import App from './App.jsx'
 import HomePage from './Pages/HomePage.jsx';
-import './index.css'
 
 
 const router = createBrowserRouter(
