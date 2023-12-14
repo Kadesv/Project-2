@@ -15,9 +15,9 @@ Forum.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    image: {
+    title: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     context: {
       type: DataTypes.STRING,

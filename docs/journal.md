@@ -1,9 +1,14 @@
-<!-- firebase google -->
-
-
-to do list
--models
--routes
--front end
--data
--middle ware
+# To Do List
+*BACKEND app.js
+    *Models
+        *
+    *Seeds
+        *
+        
+    *Routes
+*FRONTEND Root.jsx
+    *Pages/Components
+        *HomeNav
+            *NavBar
+        *LoginPage
+    *CSS
