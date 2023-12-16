@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import LogoutButton from '../components/LogoutButton.jsx';
-import HomeNav from './HomeNav.jsx';
+import {Outlet, useNavigate } from 'react-router-dom';
+import HomeNav from '../HomeNav.jsx';
 
 export default function Root() {
   const navigate = useNavigate();
@@ -22,10 +21,8 @@ export default function Root() {
           { url: '#', text: 'Contact' },
         ]}
         rightLinks={[
-          { url: '#', text: 'Login' },
-          { url: '#', text: 'Favorites' },
-          { url: '#', text: 'Settings' },
-          { url: '#', text: 'Profile' },
+          { url: '/sign', text: 'Login' },
+          { url: '/account', text: 'Account' },
         ]}/>
 
       <main>

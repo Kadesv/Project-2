@@ -7,19 +7,19 @@ import {
 } from 'react-router-dom';
 import Root from './Pages/Root.jsx';
 import ErrorPage from './Pages/ErrorPage.jsx';
-import IndexPage from './Pages/IndexPage.js';
-import LoginPage from './Pages/LoginPage.jsx';
-import YourCommentPage from './Pages/YourCommentPage.jsx';
-import YourForumsPage from './Pages/YourForumPages.jsx';
+import SignPage from './SignFolder/SignPage.jsx';
+import YourCommentPage from './Pages/AccountPages/YourCommentPage.jsx';
+import YourForumsPage from './Pages/AccountPages/YourForumsPages.jsx';
 import BrowseForumsPage from './pages/BrowseForumsPage.jsx';
-import HomeNav from './Pages/HomeNav.jsx';
+import ForumDetailPage from './Pages/ForumDetailPage.jsx';
+import AccountPage from './Pages/AccountPages/AccountPage.jsx';
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
       {/* Homepage */}
-      <Route index element={<HomeNav />} />
+      <Route index element={<BrowseForumsPage />} />
 
       {/* Browse Forums */}
       <Route
@@ -33,7 +33,7 @@ const router = createBrowserRouter(
 
       {/* Forum detail pages */}
       <Route
-        path="Forums/:forumId"
+        path="forums/:forumId"
         element={<ForumDetailPage />}
         loader={async ({ params }) => {
           const res = await axios.get(`/api/Forums/${params.ForumId}`);
@@ -41,8 +41,12 @@ const router = createBrowserRouter(
         }}
       />
 
+      <Route path='/account' element={<AccountPage />} />
+
       {/* Login */}
-      <Route path="login" element={<LoginPage />} />
+      <Route path="/sign" element={<SignPage />} />
+
+      <Route path="yourforums" element={<YourForumsPage />} />
 
       {/* Your recent activity */}
       <Route
