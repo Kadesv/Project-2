@@ -1,27 +1,16 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 
-
-export default function HomeNav({ brand, leftLinks, rightLinks }) {
+export default function HomeNav() {
   return (
-    <Navbar expand="lg" className='bg-body-tertiary'>
-      <Container fluid>
-        <Navbar.Brand href="/">{brand}</Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Nav className='me-auto'>
-            {leftLinks.map(({ url, text }) => (
-              <Nav.Link key={text} href={url}>{text}</Nav.Link>
-            ))}
-          </Nav>
-          <Nav>
-            {rightLinks.map(({ url, text }) => (
-              <Nav.Link key={text} href={url}>{text}</Nav.Link>
-            ))}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <nav class="bg-body-tertiary navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a href="/" class="navbar-brand">Ask Away Forums</a>
+        <button type="button" aria-label="Toggle navigation" class="navbar-toggler collapsed">
+          <span class="navbar-toggler-icon"></span></button><div class="navbar-collapse collapse">
+          <div class="navbar-nav"><a href="/sign" data-rr-ui-event-key="/sign" class="nav-link">Login</a>
+            <a href="/account" data-rr-ui-event-key="/account" class="nav-link">Account</a>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 }

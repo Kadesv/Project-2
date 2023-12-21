@@ -2,8 +2,8 @@ import Container from 'react-bootstrap/Container';
 
 export default function ErrorPage() {
     return(
-        <Container>
+        <div className='errorPage'>
         <h1>TODO</h1>
-        </Container>
+        </div>
     )
 }

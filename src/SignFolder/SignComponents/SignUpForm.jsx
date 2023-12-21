@@ -1,24 +1,15 @@
-import {Form, Button, Container, FloatingLabel} from 'react-bootstrap';
 
 export default function SignUpForm({ onCancel, handleSignUp }) {
     return (
         <>
-        <Container>
-            <Form onSubmit={handleSignUp}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Control type="email" placeholder="Enter email" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-            <Button variant='Secondary' onClick={onCancel}>Cancel</Button>
-
-            </Container>
+            <form onSubmit={handleSignUp}>
+                <input placeholder="name@example.com" type="email" id="floatingInput" class="form-control" />
+                <label for="floatingInput">Email address</label>
+                <input placeholder="Password" type="password" id="floatingPassword" class="form-control" />
+                <label for="floatingPassword">Password</label>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <button onClick={onCancel}>Cancel</button>
         </>
     )
 }

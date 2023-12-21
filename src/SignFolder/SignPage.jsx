@@ -15,12 +15,14 @@ export default function SignPage() {
     };
     const onSignUp = () => {
         setSignUp(true);
-    
+
     }
-    return(<>
-        {signIn && !signUp && <SignInForm onCancel={() => onCancel()}/>}
-        {!signIn && signUp && <SignUpForm  onCancel={() => onCancel()}/>}
-        {!signIn && !signUp && <BaseForm onSignIn={() => onSignIn()} onSignUp={() => onSignUp()}/>}
-        </>
+    return (
+        <div>
+            {signIn && !signUp && <SignInForm onCancel={() => onCancel()} />}
+            {!signIn && signUp && <SignUpForm onCancel={() => onCancel()} />}
+            {!signIn && !signUp && <BaseForm onSignIn={() => onSignIn()} onSignUp={() => onSignUp()} />}
+
+        </div>
     )
 }

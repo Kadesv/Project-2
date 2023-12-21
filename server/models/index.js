@@ -18,4 +18,4 @@ Comment.belongsTo(Forum, { foreignKey: 'forumId'});
 Comment.hasMany(SubComment, { foreignKey: 'commentId'});
 SubComment.belongsTo(Comment, { foreignKey: 'commentId'});
 
-export { Movie, User, Rating };
+export { Comment, User, SubComment, Forum };

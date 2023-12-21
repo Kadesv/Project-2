@@ -1,8 +1,7 @@
-import { Container } from "react-bootstrap"
 export default function ForumDetailPage() {
     return(
-        <Container>
+        <div>
         <h1>TODO</h1>
-        </Container>
+        </div>
     )
 }
