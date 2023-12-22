@@ -5,15 +5,17 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+//Pages imports
 import Root from './Pages/Root.jsx';
-import ErrorPage from './Pages/ErrorPage.jsx';
-import SignPage from './SignFolder/SignPage.jsx';
+//AppPages imports
+import ErrorPage from './Pages/AppPages/ErrorPage.jsx';
+import SignPage from './Pages/AppPages/SignPage.jsx';
+import BrowseForumsPage from './pages/AppPages/BrowseForumsPage.jsx';
+import ForumDetailPage from './Pages/AppPages/ForumDetailPage.jsx';
+//AccountPage imports
 import YourCommentPage from './Pages/AccountPages/YourCommentPage.jsx';
 import YourForumsPage from './Pages/AccountPages/YourForumsPages.jsx';
-import BrowseForumsPage from './pages/BrowseForumsPage.jsx';
-import ForumDetailPage from './Pages/ForumDetailPage.jsx';
-import AccountPage from './Pages/AccountPages/AccountPage.jsx';
-
+import AccountPage from './Pages/AccountPages/AccountPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

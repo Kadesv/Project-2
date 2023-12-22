@@ -1,6 +1,6 @@
-import SignUpForm from "./SignComponents/SignUpForm.jsx";
-import SignInForm from "./SignComponents/SignInForm.jsx";
-import BaseForm from "./SignComponents/BaseForm.jsx";
+import SignUpForm from "../../Components/SignComps/SignUpForm.jsx";
+import SignInForm from "../../Components/SignComps/SignInForm.jsx";
+import BaseForm from "../../Components/SignComps/BaseForm.jsx";
 import { useState } from "react";
 export default function SignPage() {
     const [signIn, setSignIn] = useState(false)

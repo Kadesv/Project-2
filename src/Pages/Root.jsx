@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Outlet} from 'react-router-dom';
-import HomeNav from '../HomeNav.jsx';
+import HomeNav from '../Components/HomeNav.jsx';
 
 export default function Root() {
 
