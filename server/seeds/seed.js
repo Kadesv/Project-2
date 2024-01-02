@@ -16,11 +16,13 @@ const forumsInDB = await Promise.all(
             context: context,
         });
 
-        return newforum;
+        return newForum;
     }),
 );
 
 console.log(forumsInDB);
+
+
 
 const usersToCreate = [];
 for (let i = 0; i < 10; i++) {

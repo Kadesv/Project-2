@@ -1,7 +1,9 @@
+import Container from 'react-bootstrap/Container';
+
 export default function AccountPage() {
     return (
-        <div>
+        <Container>
        <h1>Account Page TODO</h1>
-        </div>
+        </Container>
     )
 }
