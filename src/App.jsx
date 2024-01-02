@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import axios from 'axios';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Root from './Root.jsx';
+import ErrorPage from './Pages/ErrorPage.jsx';
+import SignPage from './Pages/SignPage.jsx';
+import BrowseForumsPage from './Pages/BrowseForumsPage.jsx';
+import ForumDetailPage from './Pages/ForumDetailPage.jsx';
+import AccountPage from './Pages/AccountPage.jsx';
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+      {/* Homepage */}
+      <Route index element={<BrowseForumsPage />} />
+
+      {/* Browse Forums */}
+      <Route
+        path="browse"
+        element={<BrowseForumsPage />}
+        loader={async () => {
+          const res = await axios.get('/api/browse');
+          return { forums: res.data };
+        }}
+      />
+
+      {/* Forum detail pages */}
+      <Route
+        path="forums/:forumId"
+        element={<ForumDetailPage />}
+        loader={async ({ params }) => {
+          const res = await axios.get(`/api/Forums/${params.ForumId}`);
+          return { Forum: res.data };
+        }}
+      />
+
+      <Route path='/account' element={<AccountPage />} />
+
+      {/* Login */}
+      <Route path="/sign" element={<SignPage />} />
+
+    </Route>,
+  ),
+);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
 
-export default App
