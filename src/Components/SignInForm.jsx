@@ -12,7 +12,12 @@ export default function SignInForm({ onCancel, handleSignIn }) {
     return (
 
         <>
-            <Form onSubmit={handleSignIn}>
+            <Form onSubmit={(e) => {
+                handleSignIn(e, {
+                    email: emailValue,
+                    password: passwordValue,
+                })
+            }}>
                 <FloatingLabel
                     controlId="floatingInput"
                     label="Email address"

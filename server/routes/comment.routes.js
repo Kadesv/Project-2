@@ -5,7 +5,7 @@ import { User, Forum} from '../models/index.js';
 const commentsRouter = Router()
 
 
-commentsRouter.get('/all', loginRequired, async (req, res) => {
+commentsRouter.get('/comments:', loginRequired, async (req, res) => {
   const { userId } = req.session;
 
   const user = await User.findByPk(userId);

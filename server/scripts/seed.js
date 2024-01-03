@@ -7,22 +7,6 @@ await db.sync({ force: true });
 
 console.log('Seeding database...');
 
-const forumsInDB = await Promise.all(
-    forumData.map((forum) => {
-        const { title, context } = forum;
-
-        const newForum = Forum.create({
-            title: title,
-            context: context,
-        });
-
-        return newForum;
-    }),
-);
-
-console.log(forumsInDB);
-
-
 
 const usersToCreate = [];
 for (let i = 0; i < 10; i++) {
@@ -35,3 +19,18 @@ const usersInDB = await Promise.all(usersToCreate);
 
 console.log(usersInDB);
 
+const forumsInDB = await Promise.all(
+    forumData.map((forum) => {
+        const { title, context } = forum;
+
+        const newForum = Forum.create({
+            title: title,
+            context: context,
+            userId: 2
+        });
+
+        return newForum;
+    }),
+);
+
+console.log(forumsInDB);
