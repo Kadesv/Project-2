@@ -1,5 +1,7 @@
 import { Router } from "express";
-import {User} from "../models/index.js";
+import { User } from "../models/index.js";
+import { db } from '../config/db.js';
+
 
 import { loginRequired } from "../middlewares/auth.middleware.js";
 
@@ -8,7 +10,6 @@ const authRoutes = Router();
 authRoutes.post('/api/auth', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ where: { email: email } });
-  console.log(user)
 
   if (user && user.password === password) {
     req.session.userId = user.userId;
@@ -18,7 +19,21 @@ authRoutes.post('/api/auth', async (req, res) => {
   }
 });
 
-// Note the `loginRequired` argument passed to the routes below!
+authRoutes.post('/api/register', async (req, res) => {
+  const { email, password, username } = req.body;
+  const checkEmail = await User.findOne({ where: { email: email } });
+  const checkUsername = await User.findOne({ where: { username: username } });
+
+  if (checkEmail || checkUsername) {
+    res.json({ success: false });
+  }
+  else {
+   const newUser = await User.create({ username, email, password })
+    req.session.userId = newUser.Id;
+    res.json({ success: true })
+  }
+});
+
 
 authRoutes.post('/api/logout', loginRequired, (req, res) => {
   req.session.destroy();

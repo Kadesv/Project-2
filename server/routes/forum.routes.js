@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { Forum } from '../models/index.js';
-
 const forumRouter = Router();
 
-forumRouter.get('/all', async (req, res) => {
+forumRouter.get('/browse', async (req, res) => {
   const allforums = await Forum.findAll();
   res.json(allforums);
 });

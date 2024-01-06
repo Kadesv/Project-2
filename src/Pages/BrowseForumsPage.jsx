@@ -1,20 +1,28 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
+import { useLoaderData } from 'react-router-dom';
 
 export default function BrowseForumsPage() {
-    return(
-        <Container fluid>
-        <Card style={{ width: '65rem' }}>
+  const { forums } = useLoaderData();
+
+
+  const forumListItems = forums.map(({ forumId, title, context }) => (
+    <Card style={{ width: '65rem' }} key={forumId}>
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          {context}
         </Card.Text>
-        <Button href="forums/:forumId"variant="primary">Go somewhere</Button>
+        <Button href={`/forums/${forumId}`} variant='primary'>Read More</Button>
       </Card.Body>
     </Card>
+  ));
+
+  return (
+    <Container fluid>
+      <h1>Browse</h1>
+      {forumListItems}
     </Container>
-    )
+  )
 }

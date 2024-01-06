@@ -9,7 +9,7 @@ console.log('Seeding database...');
 
 
 const usersToCreate = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 1; i <= 10; i++) {
     const username = `username${i}`;
     const email = `user${i}@test.com`;
     usersToCreate.push(User.create({ username: username, email: email, password: 'test' }));
@@ -34,3 +34,37 @@ const forumsInDB = await Promise.all(
 );
 
 console.log(forumsInDB);
+
+
+const commentInDB = await Promise.all(
+    forumData.map((comment) => {
+        const {commentText, userId} = comment;
+        const text = commentText ? commentText : 'text';
+        const newComment = Comment.create({
+            commentText: text,
+            userId: userId
+        });
+        return newComment;
+    }),
+);
+
+console.log(commentInDB)
+
+const subCommentInDB = await Promise.all(
+    forumData.map((subComment) => {
+    const {subCommentText, userId, forumId} = subComment;
+    const text = subCommentText ? subCommentText : 'text';
+        const newSubComment = SubComment.create({
+            subCommentText: text,
+            forumId: forumId,
+            userId: userId
+        });
+        return newSubComment;
+    }),
+);
+
+console.log(subCommentInDB)
+
+
+await db.close();
+console.log('Finished seeding database!');
