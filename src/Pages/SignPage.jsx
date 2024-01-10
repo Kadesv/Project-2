@@ -54,11 +54,7 @@ export default function SignPage() {
         show ?
             <>
                 <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                    <p>
-                        oh
-                    </p>
-                </Alert>
+                    <Alert.Heading>Something didn't work. Try again!</Alert.Heading></Alert>
                 {signIn && !signUp && <SignInForm onCancel={() => onCancel()} handleSignIn={handleSignIn} />}
                 {!signIn && signUp && <SignUpForm onCancel={() => onCancel()} handleSignUp={handleSignUp} />}
                 {!signIn && !signUp && <BaseForm onSignIn={() => onSignIn()} onSignUp={() => onSignUp()} />}

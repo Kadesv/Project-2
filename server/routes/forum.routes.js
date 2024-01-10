@@ -13,4 +13,14 @@ forumRouter.get('/:forumId', async (req, res) => {
   res.json(forum);
 });
 
+forumRouter.post('/new', async (req, res) => {
+  const {title, context} = req.body;
+  const newForum = await Forum.create({title, context});
+  res.json({success: true})
+  
+})
+
+
+
+
 export default forumRouter;

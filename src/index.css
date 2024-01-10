@@ -1,0 +1,17 @@
+#Root{
+    height: 100vh;
+    width: 100vw;
+}
+
+
+
+.newForumContext{
+    height: fit-content !important;
+
+}
+.newForumForm{
+    display: flex  !important;
+    flex-direction: column  !important;
+    height: 100%  !important;
+    justify-content: space-around  !important;
+}
