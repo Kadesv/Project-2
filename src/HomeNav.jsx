@@ -8,7 +8,7 @@ import SignPage from './Pages/SignPage.jsx';
 
 
 
-export default function HomeNav({ signStatus }) {
+export default function HomeNav() {
   const [showSign, setShowSign] = useState(false);
 
   const handleClose = () => setShowSign(false);
@@ -20,17 +20,16 @@ export default function HomeNav({ signStatus }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link onClick={handleShow}>{signStatus}</Nav.Link>
+            <Nav.Link onClick={handleShow}>Login</Nav.Link>
             <Offcanvas show={showSign} onHide={handleClose} placement='end'>
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Offcanvas</Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-               <SignPage/>
+                <SignPage />
               </Offcanvas.Body>
             </Offcanvas>
             <Nav.Link href="/account">Account</Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>

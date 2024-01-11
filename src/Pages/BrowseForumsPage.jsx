@@ -2,8 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
-import { useNavigate } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import NewForumForm from '../Components/NewForumForm.jsx';
@@ -12,12 +11,14 @@ import axios from 'axios';
 export default function BrowseForumsPage() {
   const navigate = useNavigate();
   const { forums } = useLoaderData();
+
+  //state
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState(false);
-
+  //functions to change state
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  //creating new forum
   const handleNewForum = async (event, formData) => {
     event.preventDefault();
 
@@ -46,8 +47,10 @@ export default function BrowseForumsPage() {
   return (
     alert ?
       <Container fluid>
+
         <Alert variant="danger" onClose={() => setAlert(false)} dismissible>
           <Alert.Heading>Something didn't work. Try again!</Alert.Heading></Alert>
+
         <h1>Browse</h1>
         <Button onClick={handleShow}>Create New Forum</Button>
         <Offcanvas show={show} onHide={handleClose}>
@@ -59,7 +62,7 @@ export default function BrowseForumsPage() {
           </Offcanvas.Body>
         </Offcanvas>
         {forumListItems}
-      </Container> 
+      </Container>
       :
 
       <Container fluid>
@@ -70,7 +73,7 @@ export default function BrowseForumsPage() {
             <Offcanvas.Title>Forum Creation</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <NewForumForm handleFormCreation={handleNewForum}/>
+            <NewForumForm handleFormCreation={handleNewForum} />
           </Offcanvas.Body>
         </Offcanvas>
         {forumListItems}

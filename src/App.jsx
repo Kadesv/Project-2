@@ -31,14 +31,14 @@ const router = createBrowserRouter(
         element={<ForumDetailPage />}
         loader={async ({ params }) => {
           const res = await axios.get(`/api/forums/${params.forumId}`);
-          return { forums: res.data };
+          return { forum: res.data };
         }}
       />
 
 <Route
         path="forums/new"
         element={<ForumDetailPage />}
-        loader={async ({ params }) => {
+        loader={async () => {
           const res = await axios.get(`/api/forums/new`);
           return { forums: res.data };
         }}

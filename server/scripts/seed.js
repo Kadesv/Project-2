@@ -26,7 +26,6 @@ const forumsInDB = await Promise.all(
         const newForum = Forum.create({
             title: title,
             context: context,
-            userId: 2
         });
 
         return newForum;
