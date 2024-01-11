@@ -35,3 +35,4 @@ User.init(
     sequelize: db,
   },
 );
+

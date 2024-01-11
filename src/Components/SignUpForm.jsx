@@ -11,7 +11,14 @@ export default function SignUpForm({ onCancel, handleSignUp }) {
 
     return (
         <>
-            <Form onSubmit={handleSignUp}>
+            <Form onSubmit={(e) => {
+                handleSignUp(e, {
+                    email: emailValue,
+                    password: passwordValue,
+                    username: usernameValue
+                });
+            }}
+            >
                 <FloatingLabel
                     controlId="floatingInput"
                     label="Email address"
@@ -47,12 +54,12 @@ export default function SignUpForm({ onCancel, handleSignUp }) {
                         onChange={(e) => setPasswordValue(e.target.value)}
                     />
                 </FloatingLabel>
-                <Button 
-                className='mb-3'
-                type='submit'>Sign Up</Button>
                 <Button
-                className="mb-3"
-                onClick={onCancel}>Cancel</Button>
+                    className='mb-3'
+                    type='submit'>Sign Up</Button>
+                <Button
+                    className="mb-3"
+                    onClick={onCancel}>Cancel</Button>
             </Form>
         </>
     )

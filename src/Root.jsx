@@ -1,11 +1,9 @@
 import axios from 'axios';
 import {Outlet} from 'react-router-dom';
 import HomeNav from './HomeNav';
-import { useState } from 'react';
 
 export default function Root() {
 
-  const [signStatus, setSignStatus] = useState('Sign In')
 
 
   const handleLogout = async (e) => {
@@ -18,8 +16,8 @@ export default function Root() {
 
   return (
     <>
-    <HomeNav  signStatus={signStatus}/>
-
+    <HomeNav />
+    
       <main>
         <Outlet />
       </main>

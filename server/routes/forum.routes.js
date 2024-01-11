@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import { Forum } from '../models/index.js';
-
 const forumRouter = Router();
 
-forumRouter.get('/all', async (req, res) => {
+forumRouter.get('/browse', async (req, res) => {
   const allforums = await Forum.findAll();
   res.json(allforums);
 });
@@ -13,5 +12,17 @@ forumRouter.get('/:forumId', async (req, res) => {
   const forum = await Forum.findByPk(forumId);
   res.json(forum);
 });
+
+
+
+forumRouter.post('/new', async (req, res) => {
+  const {title, context} = req.body;
+  await Forum.create({title, context});
+  res.json({success: true})
+  
+})
+
+
+
 
 export default forumRouter;
