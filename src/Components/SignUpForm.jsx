@@ -20,7 +20,7 @@ export default function SignUpForm({ onCancel, handleSignUp }) {
             }}
             >
                 <FloatingLabel
-                    controlId="floatingInput"
+                    controlId="floatingEmail"
                     label="Email address"
                     className="mb-3"
                 >
@@ -30,7 +30,7 @@ export default function SignUpForm({ onCancel, handleSignUp }) {
                 </FloatingLabel>
 
                 <FloatingLabel
-                    controlId="floatingInput"
+                    controlId="floatingUsername"
                     label="Username"
                     className="mb-3"
                 >

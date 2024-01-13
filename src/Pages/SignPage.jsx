@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import Alert from 'react-bootstrap/Alert';
 
-export default function SignPage() {
-
+export default function SignPage({handleClose, handleSignStatus}) {
     const navigate = useNavigate();
+
     const [signIn, setSignIn] = useState(false)
     const [signUp, setSignUp] = useState(false)
     const [show, setShow] = useState(false);
+
     const onCancel = () => {
         setSignIn(false);
         setSignUp(false);
@@ -30,7 +31,14 @@ export default function SignPage() {
         const res = await axios.post('/api/auth', formData);
 
         if (res.data.success) {
+            console.log('signed in')
+            handleClose();
+            handleSignStatus();
             navigate('/');
+        } else {
+            setShow(true)
+
+
         }
     };
 
@@ -40,16 +48,13 @@ export default function SignPage() {
         const res = await axios.post('/api/register', formData);
 
         if (res.data.success) {
+            console.log('signed up')
+            handleClose();
             navigate('/');
         } else {
             setShow(true)
-
-
         }
     };
-
-
-
     return (
         show ?
             <>

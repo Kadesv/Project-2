@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
-import { db } from '../config/db.js';
 
 
 import { loginRequired } from "../middlewares/auth.middleware.js";
@@ -28,7 +27,7 @@ authRoutes.post('/api/register', async (req, res) => {
     res.json({ success: false });
   }
   else {
-   const newUser = await User.create({ username, email, password })
+    const newUser = await User.create({ username, email, password })
     req.session.userId = newUser.Id;
     res.json({ success: true })
   }
