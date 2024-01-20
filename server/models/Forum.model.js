@@ -16,11 +16,11 @@ Forum.init(
       primaryKey: true,
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false
     },
     context: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(250),
       allowNull: false,
     },
   },

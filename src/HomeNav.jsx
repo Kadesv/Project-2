@@ -10,15 +10,15 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function HomeNav() {
-  const [showSign, setShowSign] = useState(false);
-  const [signStatus, setSignStatus] = useState(false);
+export default function HomeNav(props) {
   const navigate = useNavigate();
-  const handleSignStatus = () => setSignStatus(true);
+
+  const { signStatus, setSignStatus } = props;
+  const [showSign, setShowSign] = useState(false);
+
 
   const handleLogout = async (e) => {
     e.preventDefault();
-
     const res = await axios.post('/api/logout');
     if (res.data.success) {
       console.log('signed out');
@@ -26,48 +26,55 @@ export default function HomeNav() {
       navigate('/');
     }
   };
+
+  const handleSignStatus = () => setSignStatus(true);
   const handleClose = () => setShowSign(false);
   const handleShow = () => setShowSign(true);
+
   return (
 
     signStatus ?
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Navbar.Brand href="/">Ask Away Forums</Navbar.Brand>
-          
-          <container id='navBarButtons'>
+      <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar.Brand href="/">Ask Away Forums</Navbar.Brand>
+
+        <Container id='navBarButtons'>
           <Nav.Link onClick={handleLogout}>Sign Out</Nav.Link>
           <Nav.Link href="/account">Account</Nav.Link>
-          </container>
-          <Offcanvas show={showSign} onHide={handleClose} placement='end'>
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              <SignPage handleClose={handleClose} />
-            </Offcanvas.Body>
-          </Offcanvas>
-     
-  </Navbar>
-  :
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="/">Ask Away Forums</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link onClick={handleShow}>Sign In</Nav.Link>
-            <Offcanvas show={showSign} onHide={handleClose} placement='end'>
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <SignPage handleClose={handleClose} handleSignStatus={handleSignStatus}/>
-              </Offcanvas.Body>
-            </Offcanvas>
-            <Nav.Link href="/account">Account</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Container>
+        <Offcanvas show={showSign} onHide={handleClose} placement='end'>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <SignPage handleClose={handleClose} />
+          </Offcanvas.Body>
+        </Offcanvas>
+
+      </Navbar>
+
+      :
+
+      <Navbar expand="lg" className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="/">Ask Away Forums</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link onClick={handleShow}>Sign In</Nav.Link>
+
+              <Offcanvas show={showSign} onHide={handleClose} placement='end'>
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title>Sign Page</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <SignPage handleClose={handleClose} handleSignStatus={handleSignStatus} />
+                </Offcanvas.Body>
+              </Offcanvas>
+
+              <Nav.Link href="/account">Account</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
   );
 }

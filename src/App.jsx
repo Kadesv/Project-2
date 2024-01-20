@@ -25,6 +25,12 @@ const router = createBrowserRouter(
         }} />
 
 
+      <Route path='/account' element={<AccountPage />}
+        loader={async () => {
+          const res = await axios.get('/api/forums/account');
+          return { forums: res.data };
+        }} />
+
       {/* Forum detail pages */}
       <Route
         path="forums/:forumId"
@@ -54,7 +60,6 @@ const router = createBrowserRouter(
         }}
       />
 
-      <Route path='/account' element={<AccountPage />} />
 
       {/* Login */}
       <Route path="/sign" element={<SignPage />} />

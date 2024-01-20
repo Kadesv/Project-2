@@ -1,7 +1,5 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
-
-
 import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
@@ -37,8 +35,20 @@ authRoutes.post('/api/register', async (req, res) => {
   }
 });
 
+authRoutes.post('/api/checkss' , async (req, res) => {
+  if(req.session.userId){
+    res.json({ success: true });
+  }
+  else{
+    res.json({ success: false });
 
-authRoutes.post('/api/logout', loginRequired, (req, res) => {
+  }
+})
+
+
+
+
+authRoutes.post('/api/logout',  (req, res) => {
   req.session.destroy();
   res.json({ success: true });
 });

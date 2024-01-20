@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from "react-bootstrap/InputGroup";
 import Badge from "react-bootstrap/Badge";
+import Collapse from 'react-bootstrap/Collapse';
 import axios from "axios";
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
@@ -14,13 +15,15 @@ export default function ForumDetailPage() {
   const { forum, comments } = useLoaderData();
   const { title, context } = forum;
   const navigate = useNavigate();
+
+
   const handleNewComment = async (event, formData) => {
     event.preventDefault();
-    // console.log('hit', formData);
+    console.log('hit', formData);
     const res = await axios.post('/api/comments/new', formData);
     setCommentValue('');
     if (res.data.success) {
-     navigate(`/forums/${forum.forumId}`);      
+      navigate(`/forums/${forum.forumId}`);
     } else {
       console.log('fail');
     }
@@ -28,6 +31,8 @@ export default function ForumDetailPage() {
 
 
   const [commentValue, setCommentValue] = useState('');
+  const [open, setOpen] = useState(false);
+
 
   const commentListItems = comments.map(({ user, commentText, commentId, subComments }) => (
     <ListGroup.Item
@@ -41,10 +46,10 @@ export default function ForumDetailPage() {
       <Button as={Badge} bg="primary" pill>
         reply
       </Button >
-      
-      
+
     </ListGroup.Item>
   ));
+
 
   return (
     <Container >
@@ -57,16 +62,13 @@ export default function ForumDetailPage() {
         </Card.Body>
       </Card>
 
-      <Form onSubmit={(e) => {
-        handleNewComment(e, {
-          commentText: commentValue,
-          forumId: forum.forumId
-
-        })
-      }} >
+      <Form >
         <InputGroup className="mb-3">
           <Form.Floating >
             <Form.Control
+              onFocus={() => setOpen(true)}
+              onBlur={() => setOpen(false)}
+
               placeholder=""
               id="commentInput"
               value={commentValue}
@@ -74,8 +76,23 @@ export default function ForumDetailPage() {
             />
             <label htmlFor="commentInput">What would you like to say?</label>
           </Form.Floating>
-          <Button variant="outline-primary" id="button-addon2" type="submit">Send</Button>
+          <Button variant="" id="button-addon2" type="submit"
+            onClick={(e) => {
+              handleNewComment(e, {
+                commentText: commentValue,
+                forumId: forum.forumId
+
+              })
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24px" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="send-Button">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+            </svg>
+
+          </Button>
+
         </InputGroup>
+
       </Form>
 
       <ListGroup>

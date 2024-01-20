@@ -5,7 +5,7 @@ const commentsRouter = Router()
 
 
 
-commentsRouter.post('/new', async (req, res) => {
+commentsRouter.post('/new', loginRequired, async (req, res) => {
   const { userId } = req.session;
   const { forumId, commentText } = req.body;
   const newComment = await Comment.create(

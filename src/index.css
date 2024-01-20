@@ -3,8 +3,6 @@
     width: 100vw;
 }
 
-
-
 .newForumContext{
     height: fit-content !important;
 
@@ -37,4 +35,10 @@
 .card-subtitle{
     display: flex;
     justify-content: center;
+}
+a.nav-link{
+    margin-right: 15px;
+}
+.card{
+    word-break:break-all;
 }
