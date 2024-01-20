@@ -26,10 +26,14 @@ authRoutes.post('/api/register', async (req, res) => {
   if (checkEmail || checkUsername) {
     res.json({ success: false });
   }
-  else {
+  else if(email && password && username){
     const newUser = await User.create({ username, email, password })
     req.session.userId = newUser.Id;
     res.json({ success: true })
+  }
+  else{
+    res.json({ success: false });
+
   }
 });
 

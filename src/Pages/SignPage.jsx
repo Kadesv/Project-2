@@ -31,12 +31,11 @@ export default function SignPage({handleClose, handleSignStatus}) {
         const res = await axios.post('/api/auth', formData);
 
         if (res.data.success) {
-            console.log('signed in')
+            console.log('signed in');
             handleClose();
             handleSignStatus();
-            navigate('/');
         } else {
-            setShow(true)
+            setShow(true);
 
 
         }
@@ -50,7 +49,6 @@ export default function SignPage({handleClose, handleSignStatus}) {
         if (res.data.success) {
             console.log('signed up')
             handleClose();
-            navigate('/');
         } else {
             setShow(true)
         }

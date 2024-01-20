@@ -31,26 +31,25 @@ export default function BrowseForumsPage() {
       setAlert(true)
     }
   };
-
-  const forumListItems = forums.map(({ forumId, title, context }) => (
-    <Card style={{ width: '65rem' }} key={forumId}>
+  const forumListItems = forums.map(({ user, forumId, title, context }) => (
+    <Card style={{ display: 'flex', width: '65rem' }} key={forumId}>
+      <Card.Title>{title}</Card.Title>
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
         <Card.Text>
           {context}
         </Card.Text>
-        <Button href={`/forums/${forumId}`} variant='primary'>Read More</Button>
       </Card.Body>
+      <Card.Footer>
+      <Card.Subtitle>{user.username}</Card.Subtitle>
+        <Button href={`/forums/${forumId}`} 
+        variant='primary'>Read More</Button>
+        </Card.Footer>
     </Card>
   ));
 
   return (
     alert ?
-      <Container fluid>
-
-        <Alert variant="danger" onClose={() => setAlert(false)} dismissible>
-          <Alert.Heading>Something didn't work. Try again!</Alert.Heading></Alert>
-
+      <Container >
         <h1>Browse</h1>
         <Button onClick={handleShow}>Create New Forum</Button>
         <Offcanvas show={show} onHide={handleClose}>
@@ -58,6 +57,8 @@ export default function BrowseForumsPage() {
             <Offcanvas.Title>Forum Creation</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
+            <Alert variant="warning" onClose={() => setAlert(false)} dismissible>
+              <Alert.Heading>Please fill in all sections.</Alert.Heading></Alert>
             <NewForumForm />
           </Offcanvas.Body>
         </Offcanvas>
@@ -65,7 +66,7 @@ export default function BrowseForumsPage() {
       </Container>
       :
 
-      <Container fluid>
+      <Container >
         <h1>Browse</h1>
         <Button onClick={handleShow}>Create New Forum</Button>
         <Offcanvas show={show} onHide={handleClose}>

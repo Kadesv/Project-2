@@ -32,12 +32,12 @@ export default function HomeNav() {
 
     signStatus ?
     <Navbar expand="lg" className="bg-body-tertiary">
-    <Container>
       <Navbar.Brand href="/">Ask Away Forums</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+          
+          <container id='navBarButtons'>
+          <Nav.Link onClick={handleLogout}>Sign Out</Nav.Link>
+          <Nav.Link href="/account">Account</Nav.Link>
+          </container>
           <Offcanvas show={showSign} onHide={handleClose} placement='end'>
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>Offcanvas</Offcanvas.Title>
@@ -46,10 +46,7 @@ export default function HomeNav() {
               <SignPage handleClose={handleClose} />
             </Offcanvas.Body>
           </Offcanvas>
-          <Nav.Link href="/account">Account</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Container>
+     
   </Navbar>
   :
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -58,7 +55,7 @@ export default function HomeNav() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link onClick={handleShow}>Login</Nav.Link>
+            <Nav.Link onClick={handleShow}>Sign In</Nav.Link>
             <Offcanvas show={showSign} onHide={handleClose} placement='end'>
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title>Offcanvas</Offcanvas.Title>

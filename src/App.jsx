@@ -18,29 +18,39 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
 
       {/* Homepage */}
-      <Route index element={<BrowseForumsPage />} 
-      loader={async () => {
+      <Route index element={<BrowseForumsPage />}
+        loader={async () => {
           const res = await axios.get('/api/forums/browse');
           return { forums: res.data };
         }} />
 
-    
+
       {/* Forum detail pages */}
       <Route
         path="forums/:forumId"
         element={<ForumDetailPage />}
         loader={async ({ params }) => {
           const res = await axios.get(`/api/forums/${params.forumId}`);
-          return { forum: res.data };
+          const { forum, comments } = res.data;
+          return { forum, comments };
         }}
       />
 
-<Route
+      <Route
         path="forums/new"
         element={<ForumDetailPage />}
         loader={async () => {
           const res = await axios.get(`/api/forums/new`);
           return { forums: res.data };
+        }}
+      />
+
+      <Route
+        path="comments/new"
+        element={<ForumDetailPage />}
+        loader={async () => {
+          const res = await axios.get(`/api/comments/new`);
+          return { comments: res.data };
         }}
       />
 
