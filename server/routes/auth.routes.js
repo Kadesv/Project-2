@@ -1,8 +1,5 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
-import { db } from '../config/db.js';
-
-
 import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
@@ -27,15 +24,31 @@ authRoutes.post('/api/register', async (req, res) => {
   if (checkEmail || checkUsername) {
     res.json({ success: false });
   }
-  else {
-   const newUser = await User.create({ username, email, password })
+  else if(email && password && username){
+    const newUser = await User.create({ username, email, password })
     req.session.userId = newUser.Id;
     res.json({ success: true })
   }
+  else{
+    res.json({ success: false });
+
+  }
 });
 
+authRoutes.post('/api/checkss' , async (req, res) => {
+  if(req.session.userId){
+    res.json({ success: true });
+  }
+  else{
+    res.json({ success: false });
 
-authRoutes.post('/api/logout', loginRequired, (req, res) => {
+  }
+})
+
+
+
+
+authRoutes.post('/api/logout',  (req, res) => {
   req.session.destroy();
   res.json({ success: true });
 });

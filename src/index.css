@@ -3,8 +3,6 @@
     width: 100vw;
 }
 
-
-
 .newForumContext{
     height: fit-content !important;
 
@@ -14,4 +12,32 @@
     flex-direction: column  !important;
     height: 100%  !important;
     justify-content: space-around  !important;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-text{
+    display: flex;
+    justify-content: center;
+}
+
+.card-title{
+    display: flex;
+    justify-content: start;
+
+}
+
+.card-subtitle{
+    display: flex;
+    justify-content: center;
+}
+a.nav-link{
+    margin-right: 15px;
+}
+.card{
+    word-break:break-all;
 }

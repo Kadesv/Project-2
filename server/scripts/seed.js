@@ -17,7 +17,6 @@ for (let i = 1; i <= 10; i++) {
 
 const usersInDB = await Promise.all(usersToCreate);
 
-console.log(usersInDB);
 
 const forumsInDB = await Promise.all(
     forumData.map((forum) => {
@@ -26,13 +25,13 @@ const forumsInDB = await Promise.all(
         const newForum = Forum.create({
             title: title,
             context: context,
+            userId: 1
         });
 
         return newForum;
     }),
 );
 
-console.log(forumsInDB);
 
 
 const commentInDB = await Promise.all(
@@ -41,28 +40,29 @@ const commentInDB = await Promise.all(
         const text = commentText ? commentText : 'text';
         const newComment = Comment.create({
             commentText: text,
-            userId: userId
+            userId: 1,
+            forumId: 1
+            
         });
         return newComment;
     }),
 );
 
-console.log(commentInDB)
 
 const subCommentInDB = await Promise.all(
     forumData.map((subComment) => {
-    const {subCommentText, userId, forumId} = subComment;
+    const {subCommentText, userId} = subComment;
     const text = subCommentText ? subCommentText : 'text';
         const newSubComment = SubComment.create({
             subCommentText: text,
-            forumId: forumId,
-            userId: userId
+            userId: 1,
+            commentId: 1
+
         });
         return newSubComment;
     }),
 );
 
-console.log(subCommentInDB)
 
 
 await db.close();

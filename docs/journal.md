@@ -12,3 +12,15 @@
             *NavBar
         *LoginPage
     *CSS
+
+
+
+
+
+
+
+
+    auth signed in routes
+
+    -signed in checks for req.session.id
+    

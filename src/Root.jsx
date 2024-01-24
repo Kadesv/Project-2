@@ -1,26 +1,33 @@
-import axios from 'axios';
-import {Outlet} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import HomeNav from './HomeNav';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 export default function Root() {
+  const [signStatus, setSignStatus] = useState(false);
+  const setStatusTrue = () => { setSignStatus(true) };
 
-
-
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    const res = await axios.post('/api/logout');
+  const isSignedIn = async () => {
+    const res = await axios.post('/api/checkss');
     if (res.data.success) {
-      navigate('/');
+      setStatusTrue();
     }
-  };
+  }
+  useEffect(() => {
+    isSignedIn()
+  }, [])
+
 
   return (
     <>
-    <HomeNav />
-    
+      <HomeNav signStatus={signStatus} setSignStatus={setSignStatus} />
+
       <main>
-        <Outlet />
+        <Outlet
+          context={signStatus} />
       </main>
+
     </>
   );
 }
+
