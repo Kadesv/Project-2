@@ -17,7 +17,6 @@ for (let i = 1; i <= 10; i++) {
 
 const usersInDB = await Promise.all(usersToCreate);
 
-console.log(usersInDB);
 
 const forumsInDB = await Promise.all(
     forumData.map((forum) => {
@@ -33,7 +32,6 @@ const forumsInDB = await Promise.all(
     }),
 );
 
-console.log(forumsInDB);
 
 
 const commentInDB = await Promise.all(
@@ -50,7 +48,6 @@ const commentInDB = await Promise.all(
     }),
 );
 
-console.log(commentInDB)
 
 const subCommentInDB = await Promise.all(
     forumData.map((subComment) => {
@@ -66,7 +63,6 @@ const subCommentInDB = await Promise.all(
     }),
 );
 
-console.log(subCommentInDB)
 
 
 await db.close();

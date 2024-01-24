@@ -13,7 +13,6 @@ forumRouter.get('/browse', async (req, res) => {
 
 forumRouter.get('/account', loginRequired,async (req, res) => {
   const { userId } = req.session;
-  console.log(userId)
   res.json(await Forum.findAll({
     where:{
       userId: userId

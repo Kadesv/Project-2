@@ -13,7 +13,6 @@ commentsRouter.post('/new', loginRequired, async (req, res) => {
   );
   const user = await User.findByPk(newComment.userId);
 
-  console.log(newComment);
   res.json({ success: true, newComment:{...newComment, user} });
 });
 

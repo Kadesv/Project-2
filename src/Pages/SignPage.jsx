@@ -47,7 +47,6 @@ export default function SignPage({handleClose, handleSignStatus}) {
         const res = await axios.post('/api/register', formData);
 
         if (res.data.success) {
-            console.log('signed up')
             handleClose();
         } else {
             setShow(true)

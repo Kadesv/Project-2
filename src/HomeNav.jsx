@@ -21,7 +21,6 @@ export default function HomeNav(props) {
     e.preventDefault();
     const res = await axios.post('/api/logout');
     if (res.data.success) {
-      console.log('signed out');
       setSignStatus(false);
       navigate('/');
     }

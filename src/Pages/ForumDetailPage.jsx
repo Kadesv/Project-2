@@ -19,13 +19,12 @@ export default function ForumDetailPage() {
 
   const handleNewComment = async (event, formData) => {
     event.preventDefault();
-    console.log('hit', formData);
     const res = await axios.post('/api/comments/new', formData);
     setCommentValue('');
     if (res.data.success) {
       navigate(`/forums/${forum.forumId}`);
     } else {
-      console.log('fail');
+      //alert
     }
   };
 
