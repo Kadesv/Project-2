@@ -21,13 +21,14 @@ forumRouter.get('/account', loginRequired,async (req, res) => {
 });
 
 
+
 forumRouter.get('/:forumId', async (req, res) => {
   const { forumId } = req.params;
   const forum = await Forum.findByPk(forumId);
  
   const comments = await Comment.findAll({
     where:{
-    forumId: forumId },
+    forumId },
     include:[{
       model: User
       }, {
@@ -50,5 +51,31 @@ forumRouter.post('/new', async (req, res) => {
  }
 )
 
+forumRouter.put('/save', async (req, res) => {
+  const { userId } = req.session;
+  const {title, context, forumId} = req.body;
+
+  if(title && context && userId && forumId){
+  await Forum.update({title, context},{
+    where:{
+      forumId
+    }
+  })
+  res.json({success: true})}
+ else{
+  res.json({success: false})
+}
+ }
+)
+
+forumRouter.delete('/delete/:forumId', async (req, res) => {
+const {forumId} = req.params;
+await Forum.destroy({
+  where:{
+    forumId
+  }
+})
+  res.json({ success: true });
+});
 
 export default forumRouter;

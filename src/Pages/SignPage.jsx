@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import Alert from 'react-bootstrap/Alert';
 
-export default function SignPage({handleClose, handleSignStatus}) {
-    const navigate = useNavigate();
+export default function SignPage({handleClose, handleSignStatus, setUsername}) {
 
     const [signIn, setSignIn] = useState(false)
     const [signUp, setSignUp] = useState(false)
@@ -29,9 +28,9 @@ export default function SignPage({handleClose, handleSignStatus}) {
         event.preventDefault();
 
         const res = await axios.post('/api/auth', formData);
-
         if (res.data.success) {
-            console.log('signed in');
+        const {username} = res.data.user;
+            setUsername(username);
             handleClose();
             handleSignStatus();
         } else {
@@ -47,7 +46,10 @@ export default function SignPage({handleClose, handleSignStatus}) {
         const res = await axios.post('/api/register', formData);
 
         if (res.data.success) {
+            const {username} = res.data.user;
+            setUsername(username);
             handleClose();
+            handleSignStatus();
         } else {
             setShow(true)
         }
