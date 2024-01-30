@@ -15,7 +15,7 @@ export default function ForumTemplate({ initialData, initialIsEditing }) {
     const [isEditing, setIsEditing] = useState(initialIsEditing);
     const editMode = () => setIsEditing(true);
     const navigate = useNavigate();
-  
+
 
     const viewMode = async (event, formData) => {
         event.preventDefault();
@@ -33,10 +33,10 @@ export default function ForumTemplate({ initialData, initialIsEditing }) {
 
         event.preventDefault();
         console.log('hit');
-    await axios.delete(`/api/forums/delete/${forumId}`);
-    setIsEditing(false);
-    navigate('/account')
-     };
+        await axios.delete(`/api/forums/delete/${forumId}`);
+        setIsEditing(false);
+        navigate('/account')
+    };
     return (
         <>
             <Form className="saveForumForm">
@@ -66,7 +66,7 @@ export default function ForumTemplate({ initialData, initialIsEditing }) {
                                     forumId: initialData.forumId
                                 })
                             }}
-                            onDeleteClick={(e) => {handleDeleteForum(e, initialData.forumId)}}
+                            onDeleteClick={(e) => { handleDeleteForum(e, initialData.forumId) }}
                             forumId={initialData.forumId}
                         />
                     </Card.Footer>
