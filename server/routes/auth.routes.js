@@ -10,7 +10,7 @@ authRoutes.post('/api/auth', async (req, res) => {
 
   if (user && user.password === password) {
     req.session.userId = user.userId;
-    res.json({ success: true });
+    res.json({ success: true, user });
   } else {
     res.json({ success: false });
   }
@@ -25,9 +25,9 @@ authRoutes.post('/api/register', async (req, res) => {
     res.json({ success: false });
   }
   else if(email && password && username){
-    const newUser = await User.create({ username, email, password })
-    req.session.userId = newUser.Id;
-    res.json({ success: true })
+    const user = await User.create({ username, email, password })
+    req.session.userId = user.Id;
+    res.json({ success: true , user})
   }
   else{
     res.json({ success: false });
@@ -36,8 +36,11 @@ authRoutes.post('/api/register', async (req, res) => {
 });
 
 authRoutes.post('/api/checkss' , async (req, res) => {
-  if(req.session.userId){
-    res.json({ success: true });
+  const {userId} = req.session
+  if(userId){
+  const user = await User.findOne({ where: { userId: userId } });
+    
+    res.json({ success: true, user });
   }
   else{
     res.json({ success: false });

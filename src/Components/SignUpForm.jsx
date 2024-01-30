@@ -53,7 +53,12 @@ export default function SignUpForm({ onCancel, handleSignUp }) {
                         placeholder="Password"
                         onChange={(e) => setPasswordValue(e.target.value)}
                     />
+                    <Form.Text id="passwordHelpBlock" muted>
+                        Your password must be 8-20 characters long, contain letters and numbers,
+                        and must not contain spaces, special characters, or emoji.
+                    </Form.Text>
                 </FloatingLabel>
+
                 <Button
                     className='mb-3'
                     type='submit'>Sign Up</Button>

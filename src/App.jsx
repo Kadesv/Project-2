@@ -60,6 +60,16 @@ const router = createBrowserRouter(
         }}
       />
 
+      
+<Route
+        path="comments/newsub"
+        element={<ForumDetailPage />}
+        loader={async () => {
+          const res = await axios.get(`/api/comments/newsub`);
+          return { comments: res.data };
+        }}
+      />
+
 
       {/* Login */}
       <Route path="/sign" element={<SignPage />} />

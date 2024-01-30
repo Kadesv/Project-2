@@ -15,6 +15,7 @@ export default function EditableText({ value, onValueChange, isEditing }) {
             <>
                 <Card.Text>
                     <Form.Control
+                    plaintext
                         value={value}
                         onChange={(e) => onValueChange(e.target.value)}
                     />

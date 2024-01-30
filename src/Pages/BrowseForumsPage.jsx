@@ -36,17 +36,31 @@ export default function BrowseForumsPage() {
 
 
   const forumListItems = forums.map(({ user, forumId, title, context }) => (
-    <Card style={{ display: 'flex', width: '65rem' }} key={forumId}>
-      <Card.Title>{title}</Card.Title>
+    <Card size="xxl" key={forumId}>
+      <Card.Title >{title}</Card.Title>
       <Card.Body>
         <Card.Text>
           {context}
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-        <Card.Subtitle>{user.username}</Card.Subtitle>
-        <Button href={`/forums/${forumId}`}
-          variant='primary'>Read More</Button>
+        <Card.Subtitle className="fw-bold">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20px"
+            viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 
+             0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 
+             9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>{user.username}</Card.Subtitle>
+        <Button size="sm" href={`/forums/${forumId}`}
+          variant='outline-info'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 
+            0v11.25" />
+          </svg>
+        </Button>
       </Card.Footer>
     </Card>
   ));
@@ -54,8 +68,10 @@ export default function BrowseForumsPage() {
   return (
     alert ?
       <Container >
-        <h1>Browse</h1>
-        <Button onClick={handleShow}>Create New Forum</Button>
+        <h1>Browser</h1>
+        <Button
+          variant="info"
+          onClick={handleShow}>Create New Forum</Button>
         <Offcanvas show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Forum Creation</Offcanvas.Title>
@@ -63,7 +79,7 @@ export default function BrowseForumsPage() {
           <Offcanvas.Body>
             <Alert variant="warning" onClose={() => setAlert(false)} dismissible>
               <Alert.Heading>Please fill in all sections.</Alert.Heading></Alert>
-            <NewForumForm signStatus={signStatus} setAlertFalse={setAlertFalse}/>
+            <NewForumForm signStatus={signStatus} setAlertFalse={setAlertFalse} />
           </Offcanvas.Body>
         </Offcanvas>
         {forumListItems}
@@ -72,8 +88,10 @@ export default function BrowseForumsPage() {
       :
 
       <Container >
-        <h1>Browse</h1>
-        <Button onClick={handleShow}>Create New Forum</Button>
+        <h1>Browser</h1>
+        <Button
+          variant="info"
+          onClick={handleShow}>Create New Forum</Button>
         <Offcanvas show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Forum Creation</Offcanvas.Title>

@@ -4,60 +4,74 @@ import EditableButtons from "./EditableButtons";
 import axios from "axios";
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from 'react-router-dom';
 
-export default function ForumTemplate({ initialData, initialIsEditing, onDeleteForum, onReadForum }) {
 
+export default function ForumTemplate({ initialData, initialIsEditing }) {
 
+    const [title, setTitle] = useState(initialData.title);
+    const [context, setcontext] = useState(initialData.context);
     const [isEditing, setIsEditing] = useState(initialIsEditing);
     const editMode = () => setIsEditing(true);
+    const navigate = useNavigate();
 
-    const viewMode = async() => {
-// make axios request to save
 
-        const { data } = await axios.post(`/api/forums/save/${initialData.forumId}`, {
-            title,
-            context,
-        });
+    const viewMode = async (event, formData) => {
+        event.preventDefault();
 
-        // if (!data.error) {
-        //     setTitle(data.title);
-        //     setImage(data.image);
-        //     setcontext(data.context);
-        // }
+        const res = await axios.put('/api/forums/save/', formData);
+        if (!res.data.success) {
+            setTitle(data.title);
+            setcontext(data.context);
+        }
 
         setIsEditing(false);
     };
-    const [title, setTitle] = useState(initialData.title);
-    const [context, setcontext] = useState(initialData.context);
 
+    const handleDeleteForum = async (event, forumId) => {
 
+        event.preventDefault();
+        console.log('hit');
+        await axios.delete(`/api/forums/delete/${forumId}`);
+        setIsEditing(false);
+        navigate('/account')
+    };
     return (
         <>
-            <Card style={{ display: 'flex', width: '65rem' }} key={initialData.forumId} className="forumTemplate">
-                <EditableTitle
-                    value={title}
-                    isEditing={isEditing}
-                    onValueChange={setTitle}
-                />
-
-                <Card.Body>
-                    <EditableText
-                        value={context}
+            <Form className="saveForumForm">
+                <Card style={{ width: '65rem' }} key={initialData.forumId} className="forumTemplate">
+                    <EditableTitle
+                        value={title}
                         isEditing={isEditing}
-                        onValueChange={setcontext}
+                        onValueChange={setTitle}
                     />
-                </Card.Body>
 
-                <Card.Footer>
-                    <EditableButtons
-                        isEditing={isEditing}
-                        onEditClick={editMode}
-                        onSaveClick={viewMode}
-                        onDeleteBlog={onDeleteForum}
-                        onReadClick={onReadForum}
-                    />
-                </Card.Footer>
-            </Card>
+                    <Card.Body>
+                        <EditableText
+                            value={context}
+                            isEditing={isEditing}
+                            onValueChange={setcontext}
+                        />
+                    </Card.Body>
+
+                    <Card.Footer>
+                        <EditableButtons
+                            isEditing={isEditing}
+                            onEditClick={editMode}
+                            onSaveClick={(e) => {
+                                viewMode(e, {
+                                    title: title,
+                                    context: context,
+                                    forumId: initialData.forumId
+                                })
+                            }}
+                            onDeleteClick={(e) => { handleDeleteForum(e, initialData.forumId) }}
+                            forumId={initialData.forumId}
+                        />
+                    </Card.Footer>
+                </Card>
+            </Form >
         </>
     )
 }
