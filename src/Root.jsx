@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 export default function Root() {
   const [signStatus, setSignStatus] = useState(false);
   const [username, setUsername] = useState('Account');
+
   const handleUserName = (name) => setUsername(name);
 
   const setStatusTrue = () => { setSignStatus(true) };

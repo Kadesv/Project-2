@@ -12,7 +12,6 @@ export default function BrowseForumsPage() {
   const navigate = useNavigate();
   const { forums } = useLoaderData();
   const signStatus = useOutletContext();
-
   //state
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState(false);
