@@ -15,7 +15,9 @@ export default function EditableText({ value, onValueChange, isEditing }) {
             <>
                 <Card.Text>
                     <Form.Control
-                    plaintext
+                        style={{textAlign: 'center'}}
+                        size='sm'
+                        plaintext
                         value={value}
                         onChange={(e) => onValueChange(e.target.value)}
                     />

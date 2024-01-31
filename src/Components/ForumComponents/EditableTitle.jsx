@@ -14,11 +14,12 @@ export default function EditableTitle({ isEditing, value, onValueChange }) {
             :
 
             <Card.Title>
-            <Form.Control 
-                plaintext
-                value={value}
-                onChange={(e) => onValueChange(e.target.value)}
-            />
+                <Form.Control
+                    size='lg'
+                    plaintext
+                    value={value}
+                    onChange={(e) => onValueChange(e.target.value)}
+                />
             </Card.Title>
     )
 }

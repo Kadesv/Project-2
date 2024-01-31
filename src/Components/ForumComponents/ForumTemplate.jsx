@@ -16,7 +16,6 @@ export default function ForumTemplate({ initialData, initialIsEditing }) {
     const editMode = () => setIsEditing(true);
     const navigate = useNavigate();
 
-
     const viewMode = async (event, formData) => {
         event.preventDefault();
 
@@ -35,18 +34,20 @@ export default function ForumTemplate({ initialData, initialIsEditing }) {
         console.log('hit');
         await axios.delete(`/api/forums/delete/${forumId}`);
         setIsEditing(false);
-        navigate('/account')
+        navigate('/account');
     };
     return (
         <>
             <Form className="saveForumForm">
-                <Card style={{ width: '65rem' }} key={initialData.forumId} className="forumTemplate">
+                
+                <Card size="xxl" style={{ width: '65rem' }} key={initialData.forumId} className="forumTemplate">
+                    <Card.Header >
                     <EditableTitle
                         value={title}
                         isEditing={isEditing}
                         onValueChange={setTitle}
                     />
-
+</Card.Header>
                     <Card.Body>
                         <EditableText
                             value={context}
