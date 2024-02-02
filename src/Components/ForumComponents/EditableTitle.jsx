@@ -6,16 +6,18 @@ export default function EditableTitle({ isEditing, value, onValueChange }) {
         !isEditing ?
 
             <>
-                <Card.Title>
+                <Card.Title
+                className="fw-bold">
                     {value}
                 </Card.Title>
             </>
 
             :
 
-            <Card.Title>
+            <Card.Title
+            >
                 <Form.Control
-                    size='lg'
+                className="fw-bold"
                     plaintext
                     value={value}
                     onChange={(e) => onValueChange(e.target.value)}

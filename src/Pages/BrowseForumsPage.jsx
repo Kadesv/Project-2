@@ -35,8 +35,12 @@ export default function BrowseForumsPage() {
 
 
   const forumListItems = forums.map(({ user, forumId, title, context }) => (
-    <Card size="xxl" key={forumId}>
+    <Card size="xxl" key={forumId}
+    className='m-5'
+    >
+      <Card.Header>
       <Card.Title >{title}</Card.Title>
+      </Card.Header>
       <Card.Body>
         <Card.Text>
           {context}
@@ -69,8 +73,14 @@ export default function BrowseForumsPage() {
       <Container >
         <h1>Browser</h1>
         <Button
-          variant="info"
-          onClick={handleShow}>Create New Forum</Button>
+          variant="outline-info"
+          onClick={handleShow}>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" height='24px'viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+
+          </Button>
         <Offcanvas show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Forum Creation</Offcanvas.Title>
@@ -89,8 +99,13 @@ export default function BrowseForumsPage() {
       <Container >
         <h1>Browser</h1>
         <Button
-          variant="info"
-          onClick={handleShow}>Create New Forum</Button>
+          variant="outline-info"
+          onClick={handleShow}>
+   <svg xmlns="http://www.w3.org/2000/svg" fill="none" height='24px'viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+
+          </Button>
         <Offcanvas show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Forum Creation</Offcanvas.Title>

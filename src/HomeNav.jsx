@@ -32,7 +32,7 @@ export default function HomeNav(props) {
   return (
 
     signStatus ?
-      <Navbar expand="sm" className="bg-body-tertiary">
+      <Navbar expand="sm" id="homeNavBar"className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="/">Ask Away Forums</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />

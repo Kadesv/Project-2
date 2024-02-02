@@ -40,7 +40,8 @@ export default function ForumTemplate({ initialData, initialIsEditing }) {
         <>
             <Form className="saveForumForm">
                 
-                <Card size="xxl" style={{ width: '65rem' }} key={initialData.forumId} className="forumTemplate">
+                <Card size="xxl" 
+                style={{ width: '65rem' }} key={initialData.forumId} className="m-4">
                     <Card.Header >
                     <EditableTitle
                         value={title}
