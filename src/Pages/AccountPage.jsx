@@ -1,5 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import ForumTemplate from '../Components/ForumComponents/ForumTemplate.jsx';
+import Container from 'react-bootstrap/Container'
 export default function AccountPage() {
   const { forums } = useLoaderData();
   
@@ -15,8 +16,9 @@ export default function AccountPage() {
   });
 
   return (
-    <>
+
+    <Container>
       {forumListItems}
-    </>
+    </Container>
   )
 }

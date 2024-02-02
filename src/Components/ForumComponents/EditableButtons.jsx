@@ -42,7 +42,7 @@ export default function EditableButtons(props) {
                     </svg>
                 </Button>
                 <Button href={`/forums/${props.forumId}`}
-                    variant='outline-primary'>
+                    variant='outline-info'>
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24px"
                         viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

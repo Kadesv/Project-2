@@ -7,11 +7,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from "react-bootstrap/InputGroup";
 import SubmitButton from "../Components/SubmitButton";
+import ForumInput from "../Components/ForumComponents/ForumInput";
 import axios from "axios";
+import { useOutletContext } from "react-router-dom";
 import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
 function CustomToggle({ children, eventKey }) {
+
+
+
   const decoratedOnClick = useAccordionButton(eventKey
   );
 
@@ -40,7 +45,7 @@ export default function ForumDetailPage() {
       //alert
     }
   };
-
+  const signStatus = useOutletContext();
   const handleNewSubComment = async (event, formData) => {
     event.preventDefault();
     const res = await axios.post('/api/comments/newsub', formData);
@@ -55,9 +60,6 @@ export default function ForumDetailPage() {
   const [commentValue, setCommentValue] = useState('');
   const [subCommentValue, setSubCommentValue] = useState('');
 
-  const [open, setOpen] = useState(false);
-  const [subCommentOpen, setsubCommentOpen] = useState(false);
-
   const subCommentList = (subComment, user) => {
     return (
       subComment.map((props) => {
@@ -67,7 +69,7 @@ export default function ForumDetailPage() {
           <ListGroup.Item
             key={props.subCommentId}
           >
-            <div className="ms-5 me-auto">
+            <div className="ms-5 " >
               <div className="fw-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20px" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -85,7 +87,7 @@ export default function ForumDetailPage() {
 
   const commentListItems = comments.map(({ user, commentText, commentId, subComments }) => (
     <Accordion.Item
-      className="list-group"
+      className=""
       eventKey={`${commentId}`}
       key={commentId}
     >
@@ -94,7 +96,7 @@ export default function ForumDetailPage() {
         <ListGroup.Item
           variant="info"
           className="d-flex">
-          <div className="ms-2 me-auto">
+          <div className="ms-1 me-auto">
             <div className="fw-bold">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="20px" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -110,26 +112,27 @@ export default function ForumDetailPage() {
             </svg>
           </CustomToggle >
         </ListGroup.Item>
+
+
         {/* accordion on each comment */}
         <Accordion.Collapse eventKey={`${commentId}`}>
           <div>
             {/* subComment form */}
-            <Form >
-              <InputGroup className="mb-3">
-                <Form.Floating >
-                  <Form.Control
-                    onFocus={() => setsubCommentOpen(true)}
-                    onBlur={() => setsubCommentOpen(false)}
-
-                    placeholder=""
-                    id="subCommentInput"
-                    value={subCommentValue}
-                    onChange={(e) => setSubCommentValue(e.target.value)}
-                  />
-                  <label htmlFor="subCommentInput">What would you like to say?</label>
-                </Form.Floating>
+            <Form onSubmit={(e) => {
+              handleNewSubComment(e, {
+                subCommentText: subCommentValue,
+                commentId: commentId
+              })
+            }}>
+              <InputGroup >
+                <ForumInput
+                  text='Reply:'
+                  signStatus={signStatus}
+                  stateValue={subCommentValue}
+                  setValue={(e) => setSubCommentValue(e.target.value)}
+                />
                 <SubmitButton
-                  open={subCommentOpen}
+                  checkValue={subCommentValue}
                   handleNewComment={(e) => {
                     handleNewSubComment(e, {
                       subCommentText: subCommentValue,
@@ -147,13 +150,14 @@ export default function ForumDetailPage() {
     </Accordion.Item>
   ));
 
-
   return (
     <Container >
       <Card
         style={{ height: 'fit-content', minHeight: '25vh' }}>
-        <Card.Body>
+        <Card.Header>
           <Card.Title variant="info">{title}</Card.Title>
+        </Card.Header>
+        <Card.Body>
           <Card.Text>
             {context}
           </Card.Text>
@@ -162,20 +166,14 @@ export default function ForumDetailPage() {
       {/*comment form */}
       <Form >
         <InputGroup className="mb-3">
-          <Form.Floating >
-            <Form.Control
-              onFocus={() => setOpen(true)}
-              onBlur={() => setOpen(false)}
-
-              placeholder=""
-              id="commentInput"
-              value={commentValue}
-              onChange={(e) => setCommentValue(e.target.value)}
-            />
-            <label htmlFor="commentInput">What would you like to say?</label>
-          </Form.Floating>
+        <ForumInput
+                  text='What would you like to say?'
+                  signStatus={signStatus}
+                  stateValue={commentValue}
+                  setValue={(e) => setCommentValue(e.target.value)}
+                />
           <SubmitButton
-            open={open}
+            checkValue={commentValue}
             handleNewComment={(e) => {
               handleNewComment(e, {
                 commentText: commentValue,
@@ -185,7 +183,8 @@ export default function ForumDetailPage() {
           />
         </InputGroup>
       </Form>
-      <Accordion>
+      <Accordion
+        flush>
         {commentListItems}
       </Accordion>
     </Container>
