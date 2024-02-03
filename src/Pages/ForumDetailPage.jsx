@@ -9,23 +9,28 @@ import InputGroup from "react-bootstrap/InputGroup";
 import SubmitButton from "../Components/SubmitButton";
 import ForumInput from "../Components/ForumComponents/ForumInput";
 import axios from "axios";
+import AccordionContext from 'react-bootstrap/AccordionContext';
+import { upArrow,downArrow } from "../Components/Icon";
 import { useOutletContext } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-function CustomToggle({ children, eventKey }) {
+function CustomToggle({  eventKey, callback }) {
+  const { activeEventKey } = useContext(AccordionContext);
 
-
-
-  const decoratedOnClick = useAccordionButton(eventKey
+  const decoratedOnClick = useAccordionButton(
+    eventKey,
+    () => callback && callback(eventKey),
   );
 
+  const isCurrentEventKey = activeEventKey === eventKey;
+const ToggleImage = isCurrentEventKey ? upArrow : downArrow
   return (
     <Button
-      variant="outline"
+    variant="outline"
       onClick={decoratedOnClick}
     >
-      {children}
+      <ToggleImage/>
     </Button>
   );
 }
@@ -107,9 +112,7 @@ export default function ForumDetailPage() {
           </div>
           <CustomToggle eventKey={`${commentId}`}
             data-id={commentId} variant="outline-info">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
+            
           </CustomToggle >
         </ListGroup.Item>
 
