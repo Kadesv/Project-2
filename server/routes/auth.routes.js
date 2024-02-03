@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { User } from "../models/index.js";
-import { loginRequired } from "../middlewares/auth.middleware.js";
 
 const authRoutes = Router();
 

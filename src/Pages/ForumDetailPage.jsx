@@ -10,12 +10,12 @@ import SubmitButton from "../Components/SubmitButton";
 import ForumInput from "../Components/ForumComponents/ForumInput";
 import axios from "axios";
 import AccordionContext from 'react-bootstrap/AccordionContext';
-import { upArrow,downArrow } from "../Components/Icon";
+import { upArrow, downArrow } from "../Components/Icon";
 import { useOutletContext } from "react-router-dom";
 import { useState, useContext } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-function CustomToggle({  eventKey, callback }) {
+function CustomToggle({ eventKey, callback }) {
   const { activeEventKey } = useContext(AccordionContext);
 
   const decoratedOnClick = useAccordionButton(
@@ -24,13 +24,14 @@ function CustomToggle({  eventKey, callback }) {
   );
 
   const isCurrentEventKey = activeEventKey === eventKey;
-const ToggleImage = isCurrentEventKey ? upArrow : downArrow
+  const ToggleImage = isCurrentEventKey ? upArrow : downArrow;
+
   return (
     <Button
-    variant="outline"
+      variant="outline"
       onClick={decoratedOnClick}
     >
-      <ToggleImage/>
+      <ToggleImage />
     </Button>
   );
 }
@@ -112,7 +113,7 @@ export default function ForumDetailPage() {
           </div>
           <CustomToggle eventKey={`${commentId}`}
             data-id={commentId} variant="outline-info">
-            
+
           </CustomToggle >
         </ListGroup.Item>
 
@@ -169,12 +170,12 @@ export default function ForumDetailPage() {
       {/*comment form */}
       <Form >
         <InputGroup className="mb-3">
-        <ForumInput
-                  text='What would you like to say?'
-                  signStatus={signStatus}
-                  stateValue={commentValue}
-                  setValue={(e) => setCommentValue(e.target.value)}
-                />
+          <ForumInput
+            text='What would you like to say?'
+            signStatus={signStatus}
+            stateValue={commentValue}
+            setValue={(e) => setCommentValue(e.target.value)}
+          />
           <SubmitButton
             checkValue={commentValue}
             handleNewComment={(e) => {
