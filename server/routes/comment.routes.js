@@ -13,7 +13,7 @@ commentsRouter.post('/new', loginRequired, async (req, res) => {
   );
   const user = await User.findByPk(newComment.userId);
 
-  res.json({ success: true, newComment:{...newComment, user} });
+  res.json({ success: true, newComment: { ...newComment, user } });
 });
 
 commentsRouter.post('/newsub', loginRequired, async (req, res) => {
@@ -24,7 +24,7 @@ commentsRouter.post('/newsub', loginRequired, async (req, res) => {
   );
   const user = await User.findByPk(newSubComment.userId);
 
-  res.json({ success: true, newSubComment:{...newSubComment, user} });
+  res.json({ success: true, newSubComment: { ...newSubComment, user } });
 });
 
 export default commentsRouter;
